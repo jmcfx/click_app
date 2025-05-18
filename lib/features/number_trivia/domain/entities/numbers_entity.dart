@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class NumbersEntity extends Equatable {
+  class NumbersEntity extends Equatable {
   final String text;
   final int number;
 
