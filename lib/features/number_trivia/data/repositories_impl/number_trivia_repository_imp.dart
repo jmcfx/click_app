@@ -1,3 +1,5 @@
+import 'package:click_app/core/errors/exceptions.dart';
+
 import '../../../../core/mapper/map.dart';
 import '../../../../core/utils/repository_safe_call.dart';
 import '../models/number_trivia_models.dart';
@@ -28,31 +30,63 @@ class NumberTriviaRepositoryImpl
     required this.localDataSources,
   });
 
-  // getConcrete number from Data Source concrete implementation......
+  /// getConcrete number from Data Source concrete implementation......
   @override
-  Future<Either<Failure, NumbersEntity>> getConcreteNumberFromDataSource(
+  Future<Either<Failure, NumbersEntity>> getConcreteNumberTrivia(
     int number,
   ) async {
     final isConnected = await networkInfo.isConnected;
-    //if there is no internet connection ..
+    //if there is no internet connection .. [safeCall]  Return the the Repo SafeCall mixin..
     if (!isConnected) {
-      final localTrivia = await localDataSources.getLastNumberTriviaFromStorage(); //
-      if (localTrivia == null) return left(CacheFailure());
-      final NumbersEntity mappedEntity = mapper.convert<NumberTriviaModels, NumbersEntity>(localTrivia);
-      return right(mappedEntity);
+      return safeCall<NumbersEntity>(() async {
+        final localTrivia =
+            await localDataSources
+                .getLastNumberTriviaFromStorage(); // get data from last storage..
+        if (localTrivia == null) throw CacheException();
+        final NumbersEntity mappedEntity = mapper
+            .convert<NumberTriviaModels, NumbersEntity>(localTrivia);
+        return mappedEntity;
+      });
     }
-    // if there is  internet connection....... Call this Generic method... [safeCall]
+    // if there is internet connection.......[safeCall] Return the the Repo SafeCall mixin...
     return safeCall<NumbersEntity>(() async {
-      final NumberTriviaModels fetchedTriviaModel = await remoteDataSources.getConcreteNumberTriviaFromApi(number);
-      await localDataSources.cacheNumberTrivia( fetchedTriviaModel, ); // cache the Data in the local datasource....
-      final NumbersEntity mappedEntity = mapper.convert<NumberTriviaModels, NumbersEntity>(fetchedTriviaModel);
+      final NumberTriviaModels fetchedTriviaModel = await remoteDataSources
+          .getConcreteNumberTriviaFromApi(number);
+      await localDataSources.cacheNumberTrivia(
+        fetchedTriviaModel,
+      ); // cache the Data in the local datasource....
+      final NumbersEntity mappedEntity = mapper
+          .convert<NumberTriviaModels, NumbersEntity>(fetchedTriviaModel);
       return mappedEntity;
     });
   }
 
-  // getRandom number from Data Source  concrete implementation ........
+  /// getRandom number from Data Source concrete implementation....
   @override
-  Future<Either<Failure, NumbersEntity>> getRandomNumberFromDataSource() {
-    throw UnimplementedError();
+  Future<Either<Failure, NumbersEntity>> getRandomNumberTrivia() async {
+    final isConnected = await networkInfo.isConnected;
+    //if there is no internet connection .. [safeCall]  Return the the Repo SafeCall mixin..
+    if (!isConnected) {
+      return safeCall<NumbersEntity>(() async {
+        final localTrivia =
+            await localDataSources
+                .getLastNumberTriviaFromStorage(); // get data from last storage..
+        if (localTrivia == null) throw CacheException();
+        final NumbersEntity mappedEntity = mapper
+            .convert<NumberTriviaModels, NumbersEntity>(localTrivia);
+        return mappedEntity;
+      });
+    }
+    // if there is internet connection.......[safeCall] Return the the Repo SafeCall mixin...
+    return safeCall<NumbersEntity>(() async {
+      final NumberTriviaModels fetchedTriviaModel =
+          await remoteDataSources.getRandomNumberTriviaFromApi();
+      await localDataSources.cacheNumberTrivia(
+        fetchedTriviaModel,
+      ); // cache the Data in the local datasource....
+      final NumbersEntity mappedEntity = mapper
+          .convert<NumberTriviaModels, NumbersEntity>(fetchedTriviaModel);
+      return mappedEntity;
+    });
   }
 }

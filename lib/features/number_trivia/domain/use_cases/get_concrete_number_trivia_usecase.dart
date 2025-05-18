@@ -15,9 +15,7 @@ class GetConcreteNumberTriviaUseCase
   Future<Either<Failure, NumbersEntity>> call(
     ConcreteNumberTriviaParams params,
   ) async {
-    return await numberTriviaRepo.getConcreteNumberFromDataSource(
-      params.number,
-    );
+    return await numberTriviaRepo.getConcreteNumberTrivia(params.number);
   }
 }
 

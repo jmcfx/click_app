@@ -10,6 +10,8 @@ mixin RepositorySafeCall {
       return right(result);
     } on ServerException {
       return left(ServerFailure());
+    } on CacheException {
+      return left(CacheFailure());
     }
   }
 }
