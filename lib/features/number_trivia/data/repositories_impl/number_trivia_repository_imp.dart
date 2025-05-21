@@ -1,5 +1,3 @@
-import 'package:click_app/core/errors/exceptions.dart';
-
 import '../../../../core/mapper/map.dart';
 import '../../../../core/utils/repository_safe_call.dart';
 import '../models/number_trivia_models.dart';
@@ -11,7 +9,7 @@ import '../data_sources/number_trivia_remote_data_sources.dart';
 import '../../domain/entities/numbers_entity.dart';
 import '../../domain/repositories/number_trivia_repository.dart';
 
-import '../../../../core/platform/network_info.dart';
+import '../../../../core/network/network_info.dart';
 
 class NumberTriviaRepositoryImpl
     with RepositorySafeCall
@@ -39,10 +37,7 @@ class NumberTriviaRepositoryImpl
     //if there is no internet connection .. [safeCall]  Return the the Repo SafeCall mixin..
     if (!isConnected) {
       return safeCall<NumbersEntity>(() async {
-        final localTrivia =
-            await localDataSources
-                .getLastNumberTriviaFromStorage(); // get data from last storage..
-        if (localTrivia == null) throw CacheException();
+        final localTrivia = await localDataSources.getLastNumberTriviaFromStorage(); // get data from last storage..
         final NumbersEntity mappedEntity = mapper
             .convert<NumberTriviaModels, NumbersEntity>(localTrivia);
         return mappedEntity;
@@ -68,10 +63,7 @@ class NumberTriviaRepositoryImpl
     //if there is no internet connection .. [safeCall]  Return the the Repo SafeCall mixin..
     if (!isConnected) {
       return safeCall<NumbersEntity>(() async {
-        final localTrivia =
-            await localDataSources
-                .getLastNumberTriviaFromStorage(); // get data from last storage..
-        if (localTrivia == null) throw CacheException();
+        final localTrivia = await localDataSources.getLastNumberTriviaFromStorage(); // get data from last storage..
         final NumbersEntity mappedEntity = mapper
             .convert<NumberTriviaModels, NumbersEntity>(localTrivia);
         return mappedEntity;
