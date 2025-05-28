@@ -38,8 +38,7 @@ class NumberTriviaRepositoryImpl
     if (!isConnected) {
       return safeCall<NumbersEntity>(() async {
         final localTrivia = await localDataSources.getLastNumberTriviaFromStorage(); // get data from last storage..
-        final NumbersEntity mappedEntity = mapper
-            .convert<NumberTriviaModels, NumbersEntity>(localTrivia);
+        final NumbersEntity mappedEntity = mapper.convert<NumberTriviaModels, NumbersEntity>(localTrivia);
         return mappedEntity;
       });
     }
@@ -63,7 +62,9 @@ class NumberTriviaRepositoryImpl
     //if there is no internet connection .. [safeCall]  Return the the Repo SafeCall mixin..
     if (!isConnected) {
       return safeCall<NumbersEntity>(() async {
-        final localTrivia = await localDataSources.getLastNumberTriviaFromStorage(); // get data from last storage..
+        final localTrivia =
+            await localDataSources
+                .getLastNumberTriviaFromStorage(); // get data from last storage..
         final NumbersEntity mappedEntity = mapper
             .convert<NumberTriviaModels, NumbersEntity>(localTrivia);
         return mappedEntity;
@@ -71,13 +72,9 @@ class NumberTriviaRepositoryImpl
     }
     // if there is internet connection.......[safeCall] Return the the Repo SafeCall mixin...
     return safeCall<NumbersEntity>(() async {
-      final NumberTriviaModels fetchedTriviaModel =
-          await remoteDataSources.getRandomNumberTriviaFromApi();
-      await localDataSources.cacheNumberTrivia(
-        fetchedTriviaModel,
-      ); // cache the Data in the local datasource....
-      final NumbersEntity mappedEntity = mapper
-          .convert<NumberTriviaModels, NumbersEntity>(fetchedTriviaModel);
+      final NumberTriviaModels fetchedTriviaModel = await remoteDataSources.getRandomNumberTriviaFromApi();
+      await localDataSources.cacheNumberTrivia( fetchedTriviaModel, ); // cache the Data in the local datasource....
+      final NumbersEntity mappedEntity = mapper.convert<NumberTriviaModels, NumbersEntity>(fetchedTriviaModel);
       return mappedEntity;
     });
   }

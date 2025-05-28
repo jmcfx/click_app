@@ -1,8 +1,9 @@
-import '../../../../core/errors/failures.dart';
+import 'package:click_app/core/utils/type_def.dart';
+
 import '../../../../core/use_case/use_case.dart';
 import '../entities/numbers_entity.dart';
 import '../repositories/number_trivia_repository.dart';
-import 'package:dartz/dartz.dart';
+
 
 class GetRandomNumberTriviaUseCase implements UseCase<NumbersEntity, NoParams> {
   final NumberTriviaRepository numberTriviaRepo;
@@ -10,7 +11,7 @@ class GetRandomNumberTriviaUseCase implements UseCase<NumbersEntity, NoParams> {
   GetRandomNumberTriviaUseCase({required this.numberTriviaRepo});
 
   @override
-  Future<Either<Failure, NumbersEntity>> call(NoParams param) async {
+  Future<FailureOr<NumbersEntity>> call(NoParams params) async {
     return await numberTriviaRepo.getRandomNumberTrivia();
   }
 }

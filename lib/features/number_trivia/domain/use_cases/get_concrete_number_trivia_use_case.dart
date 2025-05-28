@@ -5,8 +5,7 @@ import '../repositories/number_trivia_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class GetConcreteNumberTriviaUseCase
-    implements UseCase<NumbersEntity, ConcreteNumberTriviaParams> {
+class GetConcreteNumberTriviaUseCase implements UseCase<NumbersEntity, ConcreteNumberTriviaParams> {
   NumberTriviaRepository numberTriviaRepo;
   GetConcreteNumberTriviaUseCase({required this.numberTriviaRepo});
 
