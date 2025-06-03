@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'src/features/number_trivia/presentation/widgets/number_trivia_page_wrapper_provider.dart';
 import 'package:flutter/material.dart';
 import 'src/di/service_locator.dart' as di;
@@ -14,10 +16,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Number Trivia',
-      themeMode: ThemeMode.dark,
-      home: NumberTriviaWrapperProvider(),
+    return ScreenUtilInit(
+       designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp(
+        debugShowCheckedModeBanner: false,
+          title: 'Number Trivia',
+          theme: ThemeData.dark(),
+          home: NumberTriviaWrapperProvider(),
+        );
+      }
     );
   }
 }

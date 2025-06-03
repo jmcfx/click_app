@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final String text;
@@ -26,7 +27,8 @@ class CustomElevatedButton extends StatelessWidget {
             isTrue
                 ? backgroundColor
                 : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
-        minimumSize: Size.fromHeight(height),
+        minimumSize: Size.fromHeight(height.r),
+      
       ),
       onPressed: onPressed,
 

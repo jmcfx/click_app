@@ -1,7 +1,7 @@
 import 'package:click_app/src/core/mapper/map.dart';
 import 'package:click_app/src/core/network/network_info.dart';
-import 'package:click_app/src/features/number_trivia/data/data_sources/number_trivia_local_data_sources.dart';
-import 'package:click_app/src/features/number_trivia/data/data_sources/number_trivia_remote_data_sources.dart';
+import 'package:click_app/src/features/number_trivia/data/data_sources/local_data_source/number_trivia_local_data_sources.dart';
+import 'package:click_app/src/features/number_trivia/data/data_sources/remote_data_source/number_trivia_remote_data_sources.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';

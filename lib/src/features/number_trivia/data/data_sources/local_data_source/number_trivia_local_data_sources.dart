@@ -4,7 +4,7 @@ import 'package:click_app/src/core/constants/storage.dart';
 import 'package:click_app/src/core/errors/exceptions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/number_trivia_models.dart';
+import '../../models/number_trivia_models.dart';
 
 abstract class NumberTriviaLocalDataSources {
   /// Cache the [ NumberTriviaModels ] locally.
@@ -26,6 +26,7 @@ class NumberTriviaLocalDataSourcesImpl implements NumberTriviaLocalDataSources {
   @override
   /// set a String of key and value for sharePreferences.... Dart Model -> Dart Object[ Map<String,dynamic> ]toJson() ->  jsonEncode
   Future<void> cacheNumberTrivia(NumberTriviaModels triviaToCache) {
+    
     return sharedPreferences.setString(
       Storage.cachedNumberTrivia,
       jsonEncode(triviaToCache.toJson()),
@@ -34,7 +35,7 @@ class NumberTriviaLocalDataSourcesImpl implements NumberTriviaLocalDataSources {
 
   @override
   ///get a String of key and value for sharePreferences.... jsonDecode -> Dart Object[ Map<String,dynamic> ]  ->  Dart Model.fromJson
-  Future<NumberTriviaModels> getLastNumberTriviaFromStorage()async{
+  Future<NumberTriviaModels> getLastNumberTriviaFromStorage() async {
     final jsonString = sharedPreferences.getString(Storage.cachedNumberTrivia);
     if (jsonString case null) throw CacheException();
     return NumberTriviaModels.fromJson(jsonDecode(jsonString));

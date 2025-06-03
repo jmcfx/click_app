@@ -3,6 +3,7 @@ import 'package:click_app/src/features/number_trivia/presentation/widgets/loadin
 import 'package:click_app/src/features/number_trivia/presentation/widgets/trivia_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/message_display.dart';
 import '../widgets/trivia_control.dart';
@@ -24,11 +25,11 @@ class NumberTriviaPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding:  EdgeInsets.all(12.0.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: 15),
+                  SizedBox(height: 15.r),
                   //top half....
                   BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
                     builder: (context, state) {
@@ -49,7 +50,7 @@ class NumberTriviaPage extends StatelessWidget {
                       return MessageDisplay(message: "Start Searching!");
                     },
                   ),
-                  SizedBox(height: 35),
+                  SizedBox(height: 35.r),
                   //buttons....
                   TriviaControls(),
                 ],

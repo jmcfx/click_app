@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:click_app/src/core/errors/exceptions.dart';
+import 'package:click_app/src/features/number_trivia/data/data_sources/number_trivia_end_point.dart';
 import 'package:click_app/src/features/number_trivia/data/models/number_trivia_models.dart';
 import 'package:http/http.dart' as https;
 
@@ -21,11 +22,11 @@ class NumberTriviaRemoteDataSourcesImpl
   NumberTriviaRemoteDataSourcesImpl({required this.client});
   @override
   Future<NumberTriviaModels> getConcreteNumberTriviaFromApi(int number) =>
-      _getNumberTriviaModels(url: 'http://numbersapi.com/$number?json');
+      _getNumberTriviaModels(url: NumberTriviaEndpoints.concrete(number));
 
   @override
   Future<NumberTriviaModels> getRandomNumberTriviaFromApi() =>
-      _getNumberTriviaModels(url: 'http://numbersapi.com/random?json');
+      _getNumberTriviaModels(url: NumberTriviaEndpoints.random());
 
 
 //created a private function that takes the url as param and returns a model....

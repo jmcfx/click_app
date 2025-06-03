@@ -4,8 +4,8 @@ import '../models/number_trivia_models.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/failures.dart';
-import '../data_sources/number_trivia_local_data_sources.dart';
-import '../data_sources/number_trivia_remote_data_sources.dart';
+import '../data_sources/local_data_source/number_trivia_local_data_sources.dart';
+import '../data_sources/remote_data_source/number_trivia_remote_data_sources.dart';
 import '../../domain/entities/numbers_entity.dart';
 import '../../domain/repositories/number_trivia_repository.dart';
 

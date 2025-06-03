@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../blocs/number_trivia/number_trivia_bloc.dart';
 import 'custom_elevated_button.dart';
 import 'custom_outline_borders.dart';
@@ -23,7 +25,7 @@ class TriviaControls extends HookWidget {
             controller: controller,
             decoration: InputDecoration(
               labelText: 'Enter a Number',
-              contentPadding: EdgeInsets.all(20),
+              contentPadding: EdgeInsets.all(20.r),
               enabledBorder: customOutlineInputBorder(),
               focusedBorder: customOutlineInputBorder(),
               border: customOutlineInputBorder(),
@@ -35,9 +37,9 @@ class TriviaControls extends HookWidget {
               return null;
             },
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 25.r),
           Row(
-            spacing: 11,
+            spacing: 11.r,
             children: [
               Expanded(
                 child: CustomElevatedButton(
@@ -63,7 +65,7 @@ class TriviaControls extends HookWidget {
                     controller.clear();
                   },
                   isTrue: false,
-                  textColor: Colors.black,
+                  textColor: Colors.grey,
                 ),
               ),
             ],
